@@ -14,7 +14,7 @@ if (isset($_GET['offer'])) {
         <meta name="description"
             content="Consultez les mentions légales et la politique de confidentialité de A&S-Web4All.">
         <title>Mentions Légales | A&S-Web4All</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/Style.css">
         <style>
         /* Style pour indiquer que le bouton est désactivé */
         .btn-accept:disabled {

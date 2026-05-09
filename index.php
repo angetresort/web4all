@@ -13,7 +13,7 @@ $offset = ($page - 1) * $itemsPerPage;
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A&S-Web4All : Gestion des stages et alternances.">
         <title>Accueil | A&S-Web4All</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/Style.css">
         <style>
             /* --- HEADER --- */
             header {
