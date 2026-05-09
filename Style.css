@@ -1,0 +1,294 @@
+/* VARIABLES ET CONFIGURATION DE BASE */
+:root {
+    --primary-blue: #2a52be;
+    --primary-purple: #6a0dad;
+    --accent-color: #4b0082;
+    --bg-light: #f4f7ff;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --success-green: #28a745;
+    --danger-red: #dc3545;
+    --gradient-main: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* HEADER & FOOTER (Communs à toutes les pages) */
+header {
+    background: var(--gradient-main);
+    color: var(--white);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+footer {
+    background: var(--gradient-main);
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* PAGE D'ACCUEIL : HERO & FILTRES */
+.hero {
+    background: var(--white);
+    padding: 4rem 1rem;
+    text-align: center;
+    border-bottom: 4px solid var(--primary-purple);
+    animation: fadeInDown 1s ease-out;
+}
+
+.hero h2 {
+    color: var(--primary-blue);
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+
+.btn-main {
+    background: var(--gradient-main);
+    color: var(--white);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-main:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+select {
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--primary-purple);
+    border-radius: 8px;
+    outline: none;
+    background: var(--white);
+    cursor: pointer;
+}
+
+/* GRILLE D'OFFRES */
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.job-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 6px solid var(--primary-blue);
+    transition: var(--transition);
+}
+
+.job-card:hover {
+    transform: translateY(-8px);
+    border-left-color: var(--primary-purple);
+}
+
+.job-card h3 {
+    color: var(--primary-purple);
+    margin-bottom: 0.5rem;
+}
+
+.job-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.job-card button {
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: var(--transition);
+}
+
+.job-card button:hover {
+    background: var(--primary-purple);
+}
+
+/* PAGE MENTIONS LÉGALES */
+.legal-content {
+    max-width: 800px;
+    margin: 3rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.decision-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.btn-accept {
+    background-color: var(--success-green);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-refuse {
+    background-color: var(--danger-red);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* BARRE DE RECHERCHE ALIGNÉE */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* PAGE FORMULAIRE */
+.form-card {
+    max-width: 600px;
+    margin: 3rem auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-card h2 {
+    color: var(--primary-purple);
+    text-align: center;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 5px rgba(42, 82, 190, 0.3);
+}
+
+/* ANIMATIONS & RESPONSIVE */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .hero h2 { font-size: 1.6rem; }
+    .filters { flex-direction: column; align-items: stretch; }
+    .job-grid { grid-template-columns: 1fr; padding: 1rem; }
+    .decision-buttons { flex-direction: column; }
+}
+/* Style spécifique pour le texte légal */
+.legal-text {
+    text-align: left;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f9f9ff;
+    border-radius: 8px;
+    max-height: 400px;
+    overflow-y: auto; /* Permet de scroller si le texte est long */
+    border: 1px solid #eee;
+}
+
+.legal-text h3 {
+    color: var(--primary-blue);
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--primary-purple);
+    display: inline-block;
+}
+
+.legal-text p, .legal-text ul {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+.legal-text ul {
+    margin-left: 1.5rem;
+}
+
+.consent-box {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px dashed #ddd;
+}
+
+/* Amélioration de la responsivité pour les boutons */
+@media (max-width: 480px) {
+    .decision-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-accept, .btn-refuse {
+        width: 100%;
+    }
+}
