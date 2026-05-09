@@ -1,5 +1,5 @@
 <?php
-require_once 'connexion.php';
+require_once 'connexion.php'; // Ce fichier contient déjà l'initialisation de $pdo
 
 $offerId = '';
 if (!empty($_GET['offer'])) {
@@ -23,9 +23,7 @@ if (!empty($_GET['offer'])) {
 $offerInfo = null;
 if ($offerId !== '') {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=Web4all_db;charset=utf8', 'root', '');
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+        // Suppression de la ligne PDO redondante ici
         $stmt = $pdo->prepare('
             SELECT o.*, e.nom AS entreprise_nom
             FROM offres o
@@ -84,9 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 move_uploaded_file($_FILES['lettre']['tmp_name'], __DIR__ . '/' . $lettrePath)
             ) {
                 try {
-                    $pdo = new PDO('mysql:host=localhost;dbname=Web4all_db;charset=utf8', 'root', '');
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+                    // Suppression de la ligne PDO redondante ici
                     $stmt = $pdo->prepare('INSERT INTO candidatures (nom, prenom, sexe, date_naissance, email, cv_path, lettre_path, offre_id) VALUES (:nom, :prenom, :sexe, :date_naissance, :email, :cv_path, :lettre_path, :offre_id)');
                     $stmt->execute([
                         ':nom' => $nom,
@@ -112,14 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Postuler | A&S-Web4All</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <header>
         <h1>A&S-Web4All</h1>
@@ -182,8 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="dateNaissance">Date de naissance</label>
                 <input type="date" id="dateNaissance" name="dateNaissance" title="Date de naissance" required>
             </div>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email (ex: nom@mail.com)" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email (ex: nom@mail.com)" required>
+            
             <div class="file-upload">
                 <label for="cv">Télécharger votre CV</label>
                 <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx,.odt,.rtf,.jpg,.png" required>
@@ -204,17 +199,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
 
     <script>
-        // Mise en majuscule du NOM après la saisie (événement blur)
         const inputNom = document.getElementById('nom');
         inputNom.addEventListener('blur', function() {
             this.value = this.value.toUpperCase();
         });
 
-        // Gestion de la soumission du formulaire
         const form = document.getElementById('applyForm');
-        
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Bloque l'envoi pour vérification
+            e.preventDefault(); 
 
             const nom = document.getElementById('nom').value.trim();
             const prenom = document.getElementById('prenom').value.trim();
@@ -224,36 +216,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const cvFile = document.getElementById('cv').files[0];
             const lettreFile = document.getElementById('lettre').files[0];
 
-            // Vérification des champs obligatoires (Nom, Prénom, Sexe, Date de naissance, Email)
             if (!nom || !prenom || !sexe || !dateNaissance || !email) {
                 alert("Erreur : Les champs Nom, Prénom, Sexe, Date de naissance et Email sont obligatoires.");
                 return;
             }
 
-            // Vérification du format Email avec Expression Régulière
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert("Veuillez saisir une adresse e-mail valide.");
                 return;
             }
 
-            // Vérification du poids des fichiers (2 Mo max)
-            const MAX_SIZE = 2 * 1024 * 1024; // 2 Mo en octets
-
+            const MAX_SIZE = 2 * 1024 * 1024; 
             if (cvFile && cvFile.size > MAX_SIZE) {
                 alert("Le CV dépasse la limite autorisée de 2 Mo.");
                 return;
             }
-
             if (lettreFile && lettreFile.size > MAX_SIZE) {
                 alert("La lettre de motivation dépasse la limite autorisée de 2 Mo.");
                 return;
             }
 
-            // Si tout est ok, soumettre le formulaire
             form.submit();
         });
     </script>
 </body>
-
 </html>

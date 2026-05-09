@@ -1,15 +1,20 @@
 <?php
-// Configuration de la connexion à la base de données
+ 
+$host = getenv('MYSQLHOST') ?: 'localhost';
+$port = getenv('MYSQLPORT') ?: '3306';
+$dbname = getenv('MYSQLDATABASE') ?: 'Web4all_db';
+$user = getenv('MYSQLUSER') ?: 'root';
+$pass = getenv('MYSQLPASSWORD') ?: '';
 
-try {
-    // Pour localhost (développement)
-    $pdo = new PDO('mysql:host=localhost;dbname=Web4all_db;charset=utf8', 'root', '');
+try { 
+    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
     
-    // Pour InfinityFree (production)
-    // $pdo = new PDO('mysql:host=sqlXXX.epizy.com;dbname=epiz_XXXXX;charset=utf8', 'epiz_XXXXX', 'ton_mot_de_passe');
+    $pdo = new PDO($dsn, $user, $pass);
     
+    // Configuration pour afficher les erreurs pendant le développement
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
 } catch (PDOException $e) {
-    die('Erreur de connexion à la base de données : ' . $e->getMessage());
+    die('Erreur de connexion à la base de données.');
 }
 ?>
